@@ -74,21 +74,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.querySelector('.lightbox');
   if (lightbox) {
     const lightboxImg = lightbox.querySelector('img');
+    const prevBtn = lightbox.querySelector('.lightbox-prev');
+    const nextBtn = lightbox.querySelector('.lightbox-next');
+    let currentGroup = [];
+    let currentIndex = 0;
+
+    const showAt = (index) => {
+      currentIndex = (index + currentGroup.length) % currentGroup.length;
+      const trigger = currentGroup[currentIndex];
+      lightboxImg.src = trigger.dataset.lightbox;
+      lightboxImg.alt = trigger.dataset.caption || '';
+    };
+
     document.querySelectorAll('[data-lightbox]').forEach((trigger) => {
+      // Chaque galerie (grille statique ou rangée défilante) forme son propre
+      // groupe de navigation, pour ne pas mélanger les photos de deux galeries.
+      const group = Array.from(
+        (trigger.closest('.gallery-row, .gallery') || document).querySelectorAll('[data-lightbox]')
+      );
       trigger.addEventListener('click', () => {
-        const src = trigger.dataset.lightbox;
-        const alt = trigger.dataset.caption || '';
-        lightboxImg.src = src;
-        lightboxImg.alt = alt;
+        currentGroup = group;
+        showAt(group.indexOf(trigger));
         lightbox.classList.add('is-open');
+        lightbox.classList.toggle('has-multiple', currentGroup.length > 1);
       });
     });
+
     const closeLightbox = () => lightbox.classList.remove('is-open');
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox || e.target.classList.contains('lightbox-close')) closeLightbox();
     });
+    if (prevBtn) prevBtn.addEventListener('click', () => showAt(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => showAt(currentIndex + 1));
     document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
+      if (e.key === 'ArrowRight') showAt(currentIndex + 1);
     });
   }
 

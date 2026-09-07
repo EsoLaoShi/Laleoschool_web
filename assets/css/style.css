@@ -454,6 +454,23 @@ p { line-height: 1.7; margin: 0 0 1em; color: var(--ink-soft); }
   position: absolute; top: 26px; right: 34px;
   color: var(--white); font-size: 2rem; background: none; border: none; cursor: pointer; line-height: 1;
 }
+.lightbox-nav {
+  display: none;
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.1);
+  color: var(--white); font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center;
+}
+.lightbox-nav:hover { background: var(--white); color: var(--ink); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+.lightbox.has-multiple .lightbox-nav { display: flex; }
+@media (max-width: 640px) {
+  .lightbox-nav { width: 40px; height: 40px; }
+  .lightbox-prev { left: 6px; }
+  .lightbox-next { right: 6px; }
+}
 
 /* ---------- Form ---------- */
 .form-card {
