@@ -551,6 +551,9 @@ p { line-height: 1.7; margin: 0 0 1em; color: var(--ink-soft); }
      les têtes. On recadre donc depuis le haut de l'image. */
   object-position: center 8%;
   display: block;
+  /* Léger flou volontaire : rend les visages des enfants moins
+     nettement identifiables sans dénaturer la photo. */
+  filter: blur(3.5px) saturate(0.98);
 }
 .profile-card {
   max-width: var(--container);
