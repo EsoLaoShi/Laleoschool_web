@@ -492,7 +492,9 @@ p { line-height: 1.7; margin: 0 0 1em; color: var(--ink-soft); }
   border: 1.5px solid var(--line);
   background: var(--cream);
   font-family: inherit;
-  font-size: 0.95rem;
+  /* iOS Safari zoome automatiquement sur un champ dont le texte fait
+     moins de 16px au focus ; on reste donc à 16px minimum sur mobile. */
+  font-size: max(0.95rem, 16px);
   color: var(--ink);
   resize: vertical;
 }
@@ -757,6 +759,10 @@ p { line-height: 1.7; margin: 0 0 1em; color: var(--ink-soft); }
   }
   .site-header.is-open .nav-links a { font-size: 0.92rem; }
   .site-header.is-open .nav-links a { padding: 10px 0; width: 100%; border-bottom: 1px solid rgba(250,245,235,0.06); }
+  /* Le soulignement de la page active (::after) chevauche le libellé de
+     l'item suivant une fois les liens empilés verticalement ; le
+     border-bottom de chaque ligne suffit déjà à marquer la séparation. */
+  .site-header.is-open .nav-links a::after { display: none; }
   .topbar { display: none; }
   .section { padding: 72px 0; }
   .stat-bar { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
