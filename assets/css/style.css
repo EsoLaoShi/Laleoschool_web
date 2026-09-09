@@ -759,13 +759,13 @@ p { line-height: 1.7; margin: 0 0 1em; color: var(--ink-soft); }
   .nav-links, .nav-actions .btn-ghost { display: none; }
   .nav-toggle { display: flex; }
   .site-header.is-open .nav-links {
-    display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
     position: absolute; top: 100%; left: 0; right: 0;
     background: #17130e; padding: 18px 28px 26px;
     border-bottom: 1px solid rgba(250,245,235,0.1);
   }
   .site-header.is-open .nav-links a { font-size: 0.92rem; }
-  .site-header.is-open .nav-links a { padding: 10px 0; width: 100%; border-bottom: 1px solid rgba(250,245,235,0.06); }
+  .site-header.is-open .nav-links a { padding: 16px 0; width: 100%; border-bottom: 1px solid rgba(250,245,235,0.06); }
   /* Le soulignement de la page active (::after) chevauche le libellé de
      l'item suivant une fois les liens empilés verticalement ; le
      border-bottom de chaque ligne suffit déjà à marquer la séparation. */
